@@ -40,6 +40,10 @@ try:
             hum = str(int(humidity)).rjust(2)
             s = temp + hum
             for digit in range(4):
+                if digit == 2:
+                    GPIO.output(segments[6], 1)  # turn on decimal point for humidity
+                else:
+                    GPIO.output(segments[6], 0)  # turn off decimal point for temperature
                 for loop in range(0, 7):
                     GPIO.output(segments[loop], num[s[digit]][loop])
                 GPIO.output(digits[digit], 0)
